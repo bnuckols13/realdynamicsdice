@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentic Relating: Progressive Vulnerability Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-teal: #5EEAD4;
+            --deep-teal: #14B8A6;
+            --soft-purple: #C084FC;
+            --warm-rose: #FDA4AF;
+            --calm-blue: #93C5FD;
+            --sage-green: #87A878;
+            --midnight: #1E293B;
+            --slate: #475569;
+            --pearl: #F8FAFC;
+            --gradient-calm: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-nature: linear-gradient(135deg, #5EEAD4 0%, #93C5FD 100%);
+            --gradient-warm: linear-gradient(135deg, #FDA4AF 0%, #C084FC 100%);
+            --gradient-earth: linear-gradient(135deg, #87A878 0%, #7BA7BC 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            min-height: 100vh;
+            color: var(--midnight);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating background elements */
+        .bg-circle {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .bg-circle1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-teal);
+            top: -100px;
+            right: -100px;
+        }
+
+        .bg-circle2 {
+            width: 400px;
+            height: 400px;
+            background: var(--soft-purple);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -5s;
+        }
+
+        .bg-circle3 {
+            width: 250px;
+            height: 250px;
+            background: var(--warm-rose);
+            top: 50%;
+            right: 10%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-eyebrow {
+            color: var(--deep-teal);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: var(--gradient-calm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: var(--slate);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        .nav-pills {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            background: white;
+            border: 2px solid transparent;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .nav-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .nav-pill.active {
+            background: var(--gradient-nature);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-nature);
+        }
+
+        .card h2 {
+            color: var(--midnight);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-nature);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Page system */
+        .page {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dice Rolling Section */
+        .dice-container {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.1) 0%, rgba(147, 197, 253, 0.1) 100%);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .dice {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--deep-teal);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dice:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+
+        .dice.rolling {
+            animation: roll 0.8s ease-in-out;
+        }
+
+        @keyframes roll {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(0.95); }
+            75% { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .dice-label {
+            font-size: 0.9rem;
+            color: var(--slate);
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        /* Level Selection Grid */
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .level-button {
+            padding: 1.5rem 1rem;
+            background: white;
+            border: 2px solid rgba(94, 234, 212, 0.3);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .level-button:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-teal);
+            box-shadow: 0 8px 25px rgba(94, 234, 212, 0.2);
+        }
+
+        .level-button.selected {
+            background: var(--gradient-nature);
+            color: white;
+            border-color: transparent;
+        }
+
+        .level-number {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Prompt Display */
+        .prompt-display {
+            background: linear-gradient(135deg, rgba(253, 164, 175, 0.1) 0%, rgba(192, 132, 252, 0.1) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .prompt-display.hidden {
+            display: none;
+        }
+
+        .current-level-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--gradient-warm);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .prompt-text {
+            font-size: 1.4rem;
+            color: var(--midnight);
+            line-height: 1.8;
+            max-width: 800px;
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 2rem;
+            background: var(--gradient-nature);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(94, 234, 212, 0.3);
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(94, 234, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--deep-teal);
+            border: 2px solid var(--primary-teal);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(94, 234, 212, 0.1);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        /* Level Description */
+        .level-description {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-teal);
+        }
+
+        .level-description h3 {
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+        }
+
+        .level-description p {
+            color: var(--slate);
+            line-height: 1.7;
+        }
+
+        /* Facilitator Notes */
+        .facilitator-notes {
+            background: linear-gradient(135deg, rgba(253, 164, 175, 0.05) 0%, rgba(192, 132, 252, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .facilitator-notes h4 {
+            color: var(--deep-teal);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .facilitator-notes ul {
+            color: var(--slate);
+            line-height: 2;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .facilitator-notes li {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .facilitator-notes li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--deep-teal);
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card { padding: 1.5rem; }
+            .dice { width: 100px; height: 100px; font-size: 3rem; }
+            .prompt-text { font-size: 1.2rem; }
+            .level-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="bg-circle bg-circle1"></div>
+    <div class="bg-circle bg-circle2"></div>
+    <div class="bg-circle bg-circle3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-eyebrow">Progressive Vulnerability Journey</div>
+            <h1>Authentic Relating</h1>
+            <p class="subtitle">Building connection through intentional depth</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-pills">
+            <button class="nav-pill active" onclick="showPage(0)">🎲 Group Experience</button>
+            <button class="nav-pill" onclick="showPage(1)">📚 About the Levels</button>
+            <button class="nav-pill" onclick="showPage(2)">🎯 Facilitator Guide</button>
+        </div>
+
+        <!-- Page 1: Interactive Experience -->
+        <div class="page active" id="page1">
+            <div class="card">
+                <h2>
+                    <div class="icon">🎲</div>
+                    Choose Your Approach
+                </h2>
+                <p style="color: var(--slate); margin-bottom: 2rem;">
+                    Facilitators can either roll for a random vulnerability level or intentionally select based on group readiness.
+                </p>
+
+                <div class="dice-container">
+                    <h3 style="color: var(--deep-teal); margin-bottom: 1rem;">Roll for a Random Level</h3>
+                    <div class="dice" id="dice" onclick="rollDice()">
+                        ?
+                    </div>
+                    <p style="color: var(--slate);">Click the dice to roll (1-13)</p>
+                </div>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                    <p style="color: var(--slate); font-weight: 600;">— OR —</p>
+                </div>
+
+                <h3 style="color: var(--deep-teal); margin-bottom: 1.5rem; text-align: center;">Select a Specific Level</h3>
+                <div class="level-grid" id="levelGrid">
+                    <!-- Levels will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Prompt Display -->
+            <div id="promptSection" class="hidden">
+                <div class="card">
+                    <div class="level-description" id="levelDescription">
+                        <!-- Level description will be inserted here -->
+                    </div>
+
+                    <div class="prompt-display">
+                        <div class="current-level-badge" id="currentLevelBadge"></div>
+                        <div class="prompt-text" id="promptText"></div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn" onclick="drawNewPrompt()">Draw Another Prompt</button>
+                        <button class="btn btn-secondary" onclick="resetSelection()">Choose Different Level</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: About the Levels -->
+        <div class="page" id="page2">
+            <div class="card">
+                <h2>
+                    <div class="icon">📚</div>
+                    Understanding the 13 Levels
+                </h2>
+                <p style="color: var(--slate); margin-bottom: 2rem; line-height: 1.7;">
+                    This framework moves from present-moment awareness to legacy and contribution. Each level represents a deeper invitation to authentic vulnerability.
+                </p>
+
+                <div id="levelDetailsSection">
+                    <!-- Level details will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Facilitator Guide -->
+        <div class="page" id="page3">
+            <div class="card">
+                <h2>
+                    <div class="icon">🎯</div>
+                    Facilitator Guidelines
+                </h2>
+                
+                <div class="facilitator-notes">
+                    <h4>Core Principles for Facilitation:</h4>
+                    <ul>
+                        <li>Start each session at levels appropriate to group cohesion and safety</li>
+                        <li>Allow silence after prompts—let responses emerge organically</li>
+                        <li>Model vulnerability and authentic response</li>
+                        <li>Track when defenses activate and name them compassionately</li>
+                        <li>Celebrate small risks and moments of genuine contact</li>
+                    </ul>
+                </div>
+
+                <div class="level-description" style="margin-top: 2rem;">
+                    <h3>Reading Group Readiness</h3>
+                    <p><strong>Begin with Levels 1-3</strong> when the group is new or energy feels tentative</p>
+                    <p style="margin-top: 1rem;"><strong>Move to Levels 4-7</strong> once you notice: consistent attendance, members referring to each other outside sessions, authentic laughter and tears</p>
+                    <p style="margin-top: 1rem;"><strong>Explore Levels 8-10</strong> when: members spontaneously share vulnerable content, the group can hold heavy emotions, there's trust in the container</p>
+                    <p style="margin-top: 1rem;"><strong>Venture to Levels 11-13</strong> sparingly and with intention—these often emerge naturally in moments of crisis, breakthrough, or deep established trust</p>
+                </div>
+
+                <div class="level-description" style="margin-top: 2rem; border-left-color: var(--warm-rose);">
+                    <h3>Supporting Authentic Responses</h3>
+                    <p><strong>When someone shares:</strong> Resist the urge to fix, teach, or redirect. Your role is to witness and reflect.</p>
+                    <p style="margin-top: 1rem;"><strong>When there's silence:</strong> Let it breathe. Count to 30 before offering another prompt.</p>
+                    <p style="margin-top: 1rem;"><strong>When defenses appear:</strong> Name them gently: "I notice we moved away from that feeling—would anyone like to say what just happened?"</p>
+                    <p style="margin-top: 1rem;"><strong>When depth emerges:</strong> Slow down. Make eye contact. Let the group feel the significance together.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Level data with prompts
+        const levels = [
+            {
+                number: 1,
+                name: "Present Moment Awareness",
+                description: "What's alive in connection right now",
+                prompts: [
+                    "Right now, what's one thing you notice about being in this group together?",
+                    "What's one thing your body is telling you about connection in this moment?",
+                    "If you rated your sense of safety in relationship on a scale of 1-10 right now, what number comes up?",
+                    "What's one small moment of connection you experienced today?"
+                ]
+            },
+            {
+                number: 2,
+                name: "Emotional Vitality",
+                description: "Connecting to relational affect",
+                prompts: [
+                    "What feeling do you most want to experience in relationships?",
+                    "When was the last time you felt genuinely seen by someone? What was happening?",
+                    "What emotion comes up when you imagine being fully yourself with another person?",
+                    "If you could choose one feeling to guide your relationships, what would it be?"
+                ]
+            },
+            {
+                number: 3,
+                name: "Values Awareness",
+                description: "Beginning to identify what matters relationally",
+                prompts: [
+                    "What's one thing you value in relationships that has nothing to do with avoiding conflict?",
+                    "If you had a relationship with no fear or defense, what would you want it to include?",
+                    "When you imagine connection five years from now, what do you hope is present?",
+                    "What kind of intimacy did you long for before you learned to protect yourself?"
+                ]
+            },
+            {
+                number: 4,
+                name: "Behavioral Values",
+                description: "Small aligned relational actions",
+                prompts: [
+                    "What's one small thing you did this week that was aligned with the partner/friend you want to be?",
+                    "When do you feel most authentically connected—what are you doing in those moments?",
+                    "What's one way of being with others that makes you feel most alive?",
+                    "What's something you've been wanting to risk in connection but patterns have been in the way?"
+                ]
+            },
+            {
+                number: 5,
+                name: "Strength Identification",
+                description: "Personal relational capacities",
+                prompts: [
+                    "What's one thing you're good at in relationships that your defenses can't diminish?",
+                    "Tell us about a time you stayed open when it was hard.",
+                    "What relational quality in yourself are you most proud of?",
+                    "What's a capacity you have that could serve deeper connection?",
+                    "When have you surprised yourself with your own courage in vulnerability?"
+                ]
+            },
+            {
+                number: 6,
+                name: "Purpose Exploration",
+                description: "What makes connection meaningful",
+                prompts: [
+                    "If your protective patterns are taking up 80% of your relational energy, what would you put in that space if it were empty?",
+                    "Complete this: 'What makes relationships worth the risk for me is...'",
+                    "What kind of connection do you want to experience that you can't have while defended?",
+                    "If you could be truly known for one thing in relationship, what would it be?",
+                    "What did you hope relationships would give you before you learned to guard yourself?",
+                    "What kind of love do you want to create in the world?"
+                ]
+            },
+            {
+                number: 7,
+                name: "Values in Conflict",
+                description: "When protection competes with connection",
+                prompts: [
+                    "What intimacy are you sacrificing right now to stay safe?",
+                    "When was the last time you chose your pattern over something that mattered to you?",
+                    "What connection, vulnerability, or depth have you said 'no' to because of protection?",
+                    "Complete this: 'If I stay defended, I won't have to risk...'",
+                    "What's something you want in relationship that openness would make possible?"
+                ]
+            },
+            {
+                number: 8,
+                name: "Identity Beyond Patterns",
+                description: "Who you are becoming relationally",
+                prompts: [
+                    "Who are you when you're not managing relational anxiety?",
+                    "What parts of your relational self existed before you learned these defenses that you want back?",
+                    "If we fast-forward five years and you're living your relational values—describe a moment with someone you love.",
+                    "What would you want to be known for in your relationships?",
+                    "Complete this: 'In healthy connection, I could become someone who...'",
+                    "What kind of presence do you want to bring to the people you love?"
+                ]
+            },
+            {
+                number: 9,
+                name: "Meaning-Making Through Pain",
+                description: "What this struggle is teaching you",
+                prompts: [
+                    "What have you learned through your relational patterns that you'd want to keep?",
+                    "How has your struggle with connection shaped your compassion or understanding?",
+                    "If you could use your relational experience to help others, what would you teach them?",
+                    "What wisdom lives in your loneliness or fear that could serve your future?",
+                    "How has relational suffering changed what you value or what matters to you?"
+                ]
+            },
+            {
+                number: 10,
+                name: "Fear of Intimacy",
+                description: "What connection would demand",
+                prompts: [
+                    "What's the scariest thing about being truly known?",
+                    "Complete this: 'If I let someone fully in, I'd have to...'",
+                    "What vulnerability are you avoiding by staying disconnected?",
+                    "If intimacy meant you could be rejected for who you really are, how does that feel?",
+                    "What depth of connection feels too much or too risky to pursue?",
+                    "If you loved openly, what would you have to grieve about the relationships you've had?"
+                ]
+            },
+            {
+                number: 11,
+                name: "Relational Presence & Witnessing",
+                description: "Building connection worth showing up for",
+                prompts: [
+                    "Who in this group is living a relational value you admire? Tell them.",
+                    "What kind of partner/friend/family member do you want to be?",
+                    "Who in your life would most benefit from you being more open? How?",
+                    "Look around—who here seems to have found something worth risking for in connection? What do you see in them?",
+                    "What relationship in your life deserves more of you than your defenses are allowing?",
+                    "Tell someone here: 'One way I see you showing up is...'"
+                ]
+            },
+            {
+                number: 12,
+                name: "Legacy & Contribution",
+                description: "What you're here to create with others",
+                prompts: [
+                    "If you died tomorrow, what would you regret not having said or shown to someone?",
+                    "What kind of love do you want to leave in the world before you're gone?",
+                    "Complete this: 'The gift I have to give in relationship that my defenses are blocking is...'",
+                    "What would you want someone you loved to say about how you showed up for them?",
+                    "If you had ten years of deep connection, what would you build/create/become with others?",
+                    "Whose loneliness touches you most—and what would it take to reach them?"
+                ]
+            },
+            {
+                number: 13,
+                name: "Commitment & Action",
+                description: "Choosing connection over protection",
+                prompts: [
+                    "What's one relational value you're willing to pursue even if anxiety gets louder?",
+                    "Complete this: 'I'm ready to show up for...'",
+                    "What are you willing to risk discomfort for in service of real connection?",
+                    "If you had to choose between safety and intimacy, which would you choose?",
+                    "What's one committed action you could take this week toward relational openness?",
+                    "Tell this group: 'What I'm building my relationships around is...'"
+                ]
+            }
+        ];
+
+        let currentLevel = null;
+        let currentPromptIndex = null;
+
+        // Initialize
+        function init() {
+            generateLevelGrid();
+            generateLevelDetails();
+        }
+
+        // Generate level selection grid
+        function generateLevelGrid() {
+            const grid = document.getElementById('levelGrid');
+            levels.forEach((level, index) => {
+                const button = document.createElement('div');
+                button.className = 'level-button';
+                button.onclick = () => selectLevel(index);
+                button.innerHTML = `
+                    <div class="level-number">${level.number}</div>
+                    <div class="level-name">${level.name}</div>
+                `;
+                grid.appendChild(button);
+            });
+        }
+
+        // Generate level details for About page
+        function generateLevelDetails() {
+            const section = document.getElementById('levelDetailsSection');
+            levels.forEach(level => {
+                const detail = document.createElement('div');
+                detail.className = 'level-description';
+                detail.style.marginBottom = '1.5rem';
+                detail.innerHTML = `
+                    <h3>Level ${level.number}: ${level.name}</h3>
+                    <p style="font-style: italic; color: var(--deep-teal); margin-bottom: 1rem;">${level.description}</p>
+                    <p style="color: var(--slate);"><strong>Sample prompts:</strong></p>
+                    <ul style="margin-top: 0.5rem; color: var(--slate); line-height: 1.8;">
+                        ${level.prompts.slice(0, 2).map(prompt => `<li>${prompt}</li>`).join('')}
+                    </ul>
+                `;
+                section.appendChild(detail);
+            });
+        }
+
+        // Roll dice
+        function rollDice() {
+            const dice = document.getElementById('dice');
+            dice.classList.add('rolling');
+            
+            // Animate through random numbers
+            let counter = 0;
+            const interval = setInterval(() => {
+                dice.textContent = Math.floor(Math.random() * 13) + 1;
+                counter++;
+                if (counter > 10) {
+                    clearInterval(interval);
+                    const finalLevel = Math.floor(Math.random() * 13);
+                    dice.textContent = levels[finalLevel].number;
+                    dice.classList.remove('rolling');
+                    
+                    setTimeout(() => {
+                        selectLevel(finalLevel);
+                    }, 500);
+                }
+            }, 80);
+        }
+
+        // Select a specific level
+        function selectLevel(index) {
+            currentLevel = index;
+            
+            // Update level button states
+            document.querySelectorAll('.level-button').forEach((btn, i) => {
+                btn.classList.toggle('selected', i === index);
+            });
+            
+            // Draw a random prompt from this level
+            drawNewPrompt();
+            
+            // Show prompt section
+            document.getElementById('promptSection').classList.remove('hidden');
+            
+            // Scroll to prompt
+            setTimeout(() => {
+                document.getElementById('promptSection').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 100);
+        }
+
+        // Draw new prompt from current level
+        function drawNewPrompt() {
+            if (currentLevel === null) return;
+            
+            const level = levels[currentLevel];
+            const prompts = level.prompts;
+            
+            // Get a random prompt different from the last one
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * prompts.length);
+            } while (newIndex === currentPromptIndex && prompts.length > 1);
+            
+            currentPromptIndex = newIndex;
+            
+            // Update display
+            document.getElementById('currentLevelBadge').textContent = 
+                `Level ${level.number}: ${level.name}`;
+            document.getElementById('promptText').textContent = prompts[newIndex];
+            
+            // Update level description
+            document.getElementById('levelDescription').innerHTML = `
+                <h3>${level.name}</h3>
+                <p>${level.description}</p>
+            `;
+            
+            // Add animation
+            const promptDisplay = document.querySelector('.prompt-display');
+            promptDisplay.style.animation = 'none';
+            setTimeout(() => {
+                promptDisplay.style.animation = 'fadeIn 0.6s ease';
+            }, 10);
+        }
+
+        // Reset selection
+        function resetSelection() {
+            currentLevel = null;
+            currentPromptIndex = null;
+            document.getElementById('promptSection').classList.add('hidden');
+            document.querySelectorAll('.level-button').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.getElementById('dice').textContent = '?';
+            
+            // Scroll back to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Page navigation
+        function showPage(pageIndex) {
+            const pages = document.querySelectorAll('.page');
+            const pills = document.querySelectorAll('.nav-pill');
+            
+            pages.forEach((page, index) => {
+                page.classList.toggle('active', index === pageIndex);
+            });
+            
+            pills.forEach((pill, index) => {
+                pill.classList.toggle('active', index === pageIndex);
+            });
+            
+            // Scroll to top when changing pages
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize on load
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
